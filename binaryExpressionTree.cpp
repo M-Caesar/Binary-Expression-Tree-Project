@@ -1,21 +1,24 @@
 #include "binaryExpressionTree.h"
+binaryExpressionTree<string>::binaryExpressionTree()
+{
+}
 
-
-void buildExpressionTree(string pfinput)
+void binaryExpressionTree<string>::buildExpressionTree(string pfinput)
+//void buildExpressionTree(string pfinput)
 {
 	//This class is a template, so the Type parameter should
 	//be specified as a pointer to a nodeType<stromg struct>
 	stack<nodeType<string>*> binaryTreeNodes;
 
 	string postfix = pfinput;
-	nodeType<string>* newdigitNode = new nodeType<string>;
-	nodeType<string>* newopNode = new nodeType<string>;
+	//nodeType<string>* newdigitNode = new nodeType<string>;
+	//nodeType<string>* newopNode = new nodeType<string>;
 	nodeType<string>* rootNode = new nodeType<string>;
 
 	//convert the string into an array of chars
 	char* expression = new char[postfix.length() + 1];
-	char* c = strcpy(expression, postfix.c_str());
-	char* c = strtok(expression, postfix.c_str());
+	strcpy(expression, postfix.c_str());
+	char* c = strtok(expression, " ");
 
 
 	//change to do while loop
@@ -24,6 +27,7 @@ void buildExpressionTree(string pfinput)
 	{
 		if (isdigit(c[0]))
 		{ //how to create new node?
+			nodeType<string>* newdigitNode = new nodeType<string>;
 			string(c);
 			//store the string onto the info field
 			newdigitNode->info = c;
@@ -32,10 +36,11 @@ void buildExpressionTree(string pfinput)
 		}
 		else
 		{
-			newopNode->info = c;
 			if (!binaryTreeNodes.empty())
 			{
+				nodeType<string>* newopNode = new nodeType<string>;
 				nodeType<string>* ref;
+				newopNode->info = string(c); // check back later
 				ref = binaryTreeNodes.top();
 				newopNode->rLink = ref;
 				binaryTreeNodes.pop();
@@ -55,8 +60,13 @@ void buildExpressionTree(string pfinput)
 			
 		}
 	} while (c = strtok(NULL, " "));
+	//while (token = strcpy(NULL, " "));
+	delete[] expression; //check back later
+
 	if (!binaryTreeNodes.empty())
 	{
+		nodeType<string>* rootNode = new nodeType<string>;
+
 		rootNode = binaryTreeNodes.top();
 		binaryTreeNodes.pop();
 		if (!binaryTreeNodes.empty())
@@ -65,10 +75,93 @@ void buildExpressionTree(string pfinput)
 			rootNode = nullptr;
 		}
 	}
-	//while (token = strcpy(NULL, " "));
 }
-double evaluateExpressionTree();
-//double evaluateExpressionTree(noteType<string>*);
-bool search(const string&);
-void insert(const string&);
-void deleteNode(const string&);
+double binaryExpressionTree<string>::evaluateExpressionTree()
+{
+	nodeType<string>* p = new nodeType<string>;
+	if (p->lLink == nullptr && p->rLink == nullptr)
+	{
+		return stod(p->info);
+	}
+	else
+	{
+		string opp = p->info;
+		double x = evaluateExpressionTree(p->lLink);
+		double y = evaluateExpressionTree(p->rLink);
+		if (opp == "+")
+		{
+			return x + y;
+		}
+		else if (opp == "-")
+		{
+			return x - y;
+		}
+		else if (opp == "*")
+		{
+			return x + y;
+		}
+		else if (opp == "/")
+		{
+			if (y != 0)
+			{
+				return x / y;
+			}
+			else
+			{
+				cerr << "Cant divide by zero" << endl;
+				return 0;
+			}
+		}
+		else
+		{
+			cerr << "Unsupported operator" << endl;
+			return 0;
+		}
+	}
+}
+double binaryExpressionTree<string>::evaluateExpressionTree(nodeType<string>* p)
+{
+	//nodeType<string>* p = new nodeType<string>;
+	if (p->lLink == nullptr && p->rLink == nullptr)
+	{
+		return stod(p->info);
+	}
+	else
+	{
+		string opp = p->info;
+		double x = evaluateExpressionTree(p->lLink);
+		double y = evaluateExpressionTree(p->rLink);
+		if (opp == "+")
+		{
+			return x + y;
+		}
+		else if (opp == "-")
+		{
+			return x - y;
+		}
+		else if (opp == "*")
+		{
+			return x + y;
+		}
+		else if (opp == "/")
+		{
+			if (y != 0)
+			{
+				return x / y;
+			}
+			else
+			{
+				cerr << "Cant divide by zero" << endl;
+				return 0;
+			}
+		}
+		else
+		{
+			cerr << "Unsupported operator" << endl;
+			return 0;
+		}
+	}
+}
+bool binaryExpressionTree<string>::search(const string&) {}
+void binaryExpressionTree<string>::insert(const string&) {}
+void binaryExpressionTree<string>::deleteNode(const string&) {}
