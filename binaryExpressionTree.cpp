@@ -1,9 +1,9 @@
 #include "binaryExpressionTree.h"
-binaryExpressionTree<string>::binaryExpressionTree()
+binaryExpressionTree::binaryExpressionTree()
 {
 }
 
-void binaryExpressionTree<string>::buildExpressionTree(string pfinput)
+void binaryExpressionTree::buildExpressionTree(string pfinput)
 //void buildExpressionTree(string pfinput)
 {
 	//This class is a template, so the Type parameter should
@@ -76,7 +76,7 @@ void binaryExpressionTree<string>::buildExpressionTree(string pfinput)
 		}
 	}
 }
-double binaryExpressionTree<string>::evaluateExpressionTree()
+double binaryExpressionTree::evaluateExpressionTree()
 {
 	nodeType<string>* p = new nodeType<string>;
 	if (p->lLink == nullptr && p->rLink == nullptr)
@@ -98,7 +98,7 @@ double binaryExpressionTree<string>::evaluateExpressionTree()
 		}
 		else if (opp == "*")
 		{
-			return x + y;
+			return x * y;
 		}
 		else if (opp == "/")
 		{
@@ -119,7 +119,7 @@ double binaryExpressionTree<string>::evaluateExpressionTree()
 		}
 	}
 }
-double binaryExpressionTree<string>::evaluateExpressionTree(nodeType<string>* p)
+double binaryExpressionTree::evaluateExpressionTree(nodeType<string>* p)
 {
 	//nodeType<string>* p = new nodeType<string>;
 	if (p->lLink == nullptr && p->rLink == nullptr)
@@ -162,6 +162,6 @@ double binaryExpressionTree<string>::evaluateExpressionTree(nodeType<string>* p)
 		}
 	}
 }
-bool binaryExpressionTree<string>::search(const string&) {}
-void binaryExpressionTree<string>::insert(const string&) {}
-void binaryExpressionTree<string>::deleteNode(const string&) {}
+//bool binaryExpressionTree::search(const string& s) const { ; }
+//void binaryExpressionTree::insert(const string&) {};
+//void binaryExpressionTree::deleteNode(const string&) {};

@@ -4,16 +4,19 @@
 #include <stack>
 #include <cctype>
 #include <string>
+using namespace std;
 
-template <class elemType>
-class binaryExpressionTree: public binaryTreeType<elemType>
+//template <class string>
+class binaryExpressionTree: public binaryTreeType<string>
 {
-	binaryExpressionTree();
+public:
+	//binaryExpressionTree();
 	void buildExpressionTree(string);
 	double evaluateExpressionTree();
-	double evaluateExpressionTree(noteType<string>*);
-	bool search(const string&);
-	void insert(const string&);
-	void deleteNode(const string&);
+	double evaluateExpressionTree(nodeType<string>* p);
+	bool search(const string&) const { ; };
+	void insert(const string&) {};
+	void deleteNode(const string&) {};
+
 };
 

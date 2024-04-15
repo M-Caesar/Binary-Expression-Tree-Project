@@ -5,15 +5,17 @@
 #include "binaryExpressionTree.h"
 #include <fstream>
 
+
 int main()
 {
     string postfix;
-    binaryExpressionTree<string> expressionTree;
+    binaryExpressionTree expressionTree;
+
     //std::cout << "Hello World!\n";
     //ifstream inFile("postfix.txt");
     getline(cin,postfix);
-
-    
-    double answer;
+    expressionTree.buildExpressionTree(postfix);
+    double answer = expressionTree.evaluateExpressionTree();
+    cout << "This is the result" << answer << endl;
 
 }
