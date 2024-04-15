@@ -1,7 +1,5 @@
 #include "binaryExpressionTree.h"
-binaryExpressionTree::binaryExpressionTree()
-{
-}
+
 
 void binaryExpressionTree::buildExpressionTree(string pfinput)
 //void buildExpressionTree(string pfinput)
@@ -141,7 +139,7 @@ double binaryExpressionTree::evaluateExpressionTree(nodeType<string>* p)
 		}
 		else if (opp == "*")
 		{
-			return x + y;
+			return x * y;
 		}
 		else if (opp == "/")
 		{

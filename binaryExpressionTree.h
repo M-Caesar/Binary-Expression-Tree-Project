@@ -14,9 +14,9 @@ public:
 	void buildExpressionTree(string);
 	double evaluateExpressionTree();
 	double evaluateExpressionTree(nodeType<string>* p);
-	bool search(const string&) const { ; };
-	void insert(const string&) {};
-	void deleteNode(const string&) {};
+	bool search(const string& s) const {};
+	void insert(const string& i) {};
+	void deleteNode(const string& d) {};
 
 };
 
