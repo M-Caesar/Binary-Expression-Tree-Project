@@ -13,9 +13,10 @@ int main()
 
     //std::cout << "Hello World!\n";
     //ifstream inFile("postfix.txt");
+    //will make this a wile loop for .txt files later
     getline(cin,postfix);
     expressionTree.buildExpressionTree(postfix);
     double answer = expressionTree.evaluateExpressionTree();
     cout << "This is the result" << answer << endl;
-
+    expressionTree.destroyTree();
 }

@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "binaryExpressionTree.h"
 
 
@@ -63,100 +64,72 @@ void binaryExpressionTree::buildExpressionTree(string pfinput)
 
 	if (!binaryTreeNodes.empty())
 	{
-		nodeType<string>* rootNode = new nodeType<string>;
+		//nodeType<string>* rootNode = new nodeType<string>;
 
-		rootNode = binaryTreeNodes.top();
+		//rootNode = binaryTreeNodes.top();
+		root = binaryTreeNodes.top();
 		binaryTreeNodes.pop();
 		if (!binaryTreeNodes.empty())
 		{
 			std::cout << "There was an error. Setting root to null" << std::endl;
-			rootNode = nullptr;
+			root = nullptr;
 		}
 	}
 }
 double binaryExpressionTree::evaluateExpressionTree()
 {
-	nodeType<string>* p = new nodeType<string>;
-	if (p->lLink == nullptr && p->rLink == nullptr)
+	if (root == nullptr)
 	{
-		return stod(p->info);
+		cerr << "Tree is empty" << endl;
+		return 0;
 	}
-	else
-	{
-		string opp = p->info;
-		double x = evaluateExpressionTree(p->lLink);
-		double y = evaluateExpressionTree(p->rLink);
-		if (opp == "+")
-		{
-			return x + y;
-		}
-		else if (opp == "-")
-		{
-			return x - y;
-		}
-		else if (opp == "*")
-		{
-			return x * y;
-		}
-		else if (opp == "/")
-		{
-			if (y != 0)
-			{
-				return x / y;
-			}
-			else
-			{
-				cerr << "Cant divide by zero" << endl;
-				return 0;
-			}
-		}
-		else
-		{
-			cerr << "Unsupported operator" << endl;
-			return 0;
-		}
-	}
+
+	return evaluateExpressionTree(root);
 }
 double binaryExpressionTree::evaluateExpressionTree(nodeType<string>* p)
 {
 	//nodeType<string>* p = new nodeType<string>;
-	if (p->lLink == nullptr && p->rLink == nullptr)
+	if (p != nullptr)
 	{
-		return stod(p->info);
-	}
-	else
-	{
-		string opp = p->info;
-		double x = evaluateExpressionTree(p->lLink);
-		double y = evaluateExpressionTree(p->rLink);
-		if (opp == "+")
+		if (p->lLink == nullptr && p->rLink == nullptr)
 		{
-			return x + y;
-		}
-		else if (opp == "-")
-		{
-			return x - y;
-		}
-		else if (opp == "*")
-		{
-			return x * y;
-		}
-		else if (opp == "/")
-		{
-			if (y != 0)
-			{
-				return x / y;
-			}
-			else
-			{
-				cerr << "Cant divide by zero" << endl;
-				return 0;
-			}
+			return stod(p->info);
 		}
 		else
 		{
-			cerr << "Unsupported operator" << endl;
-			return 0;
+
+			double x = evaluateExpressionTree(p->lLink);
+			double y = evaluateExpressionTree(p->rLink);
+			string opp = p->info;
+			if (opp == "+")
+			{
+				return x + y;
+			}
+			else if (opp == "-")
+			{
+				return x - y;
+			}
+			else if (opp == "*")
+			{
+				return x * y;
+			}
+			else if (opp == "/")
+			{
+				if (y != 0)
+				{
+					return x / y;
+				}
+				else
+				{
+					cerr << "Cant divide by zero" << endl;
+					return 0;
+				}
+			}
+			else
+			{
+				cerr << "Unsupported operator" << endl;
+				return 0;
+			}
 		}
 	}
 }
