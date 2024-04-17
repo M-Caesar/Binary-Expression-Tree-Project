@@ -22,14 +22,17 @@ void binaryExpressionTree::buildExpressionTree(string pfinput)
 
 	//change to do while loop
 	//for (char c : postfix)
-	do
+	//do
+	while (c != nullptr)
 	{
 		if (isdigit(c[0]))
 		{ //how to create new node?
 			nodeType<string>* newdigitNode = new nodeType<string>;
-			string(c);
+			newdigitNode->info = string(c);
+			newdigitNode->lLink = nullptr;
+			newdigitNode->rLink = nullptr;
 			//store the string onto the info field
-			newdigitNode->info = c;
+			//newdigitNode->info = c;
 			//push the new node onto the stack
 			binaryTreeNodes.push(newdigitNode);
 		}
@@ -58,7 +61,8 @@ void binaryExpressionTree::buildExpressionTree(string pfinput)
 				std::cout << "Error - Stack is empty" << endl;
 			
 		}
-	} while (c = strtok(NULL, " "));
+		c = strtok(nullptr, " ");
+	} //while (c = strtok(NULL, " "));
 	//while (token = strcpy(NULL, " "));
 	delete[] expression; //check back later
 
@@ -91,6 +95,8 @@ double binaryExpressionTree::evaluateExpressionTree(nodeType<string>* p)
 	//nodeType<string>* p = new nodeType<string>;
 	if (p != nullptr)
 	{
+		//cout << "This is the left link" << p->lLink << endl;
+		//cout << "This is the right link" << p->rLink << endl;
 		if (p->lLink == nullptr && p->rLink == nullptr)
 		{
 			return stod(p->info);
